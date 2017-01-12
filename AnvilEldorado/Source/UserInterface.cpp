@@ -1,3 +1,5 @@
+#include <d3d9.h>
+#include <MinHook.h>
 #include <vector>
 
 #include "Utils\Logger.hpp"
@@ -146,6 +148,51 @@ namespace AnvilEldorado
 		return UI_Forge_ButtonPressHandler(p_Arg1, p_ControllerData);
 	}
 
+	typedef HRESULT(WINAPI *D3D9ENDSCENE)(LPDIRECT3DDEVICE9);
+	D3D9ENDSCENE endScenePtr = NULL;
+
+	typedef HRESULT(WINAPI *D3D9RESET)(LPDIRECT3DDEVICE9, D3DPRESENT_PARAMETERS*);
+	D3D9RESET resetPtr = NULL;
+
+	HRESULT __stdcall DirectXEndSceneHook(LPDIRECT3DDEVICE9 device)
+	{
+		return (*endScenePtr)(device);
+	}
+
+	HRESULT __stdcall DirectXResetHook(LPDIRECT3DDEVICE9 device, D3DPRESENT_PARAMETERS *params)
+	{
+		auto result = resetPtr(device, params);
+		return result;
+	}
+
+	bool DirectXCreateDeviceHook(bool windowless, bool nullRefDevice)
+	{
+		typedef bool(*CreateDevicePtr)(bool windowless, bool nullRefDevice);
+		auto CreateDevice = reinterpret_cast<CreateDevicePtr>(0xA21B40);
+		if (!CreateDevice(windowless, nullRefDevice))
+			return false;
+
+		LPDIRECT3DDEVICE9 device = *reinterpret_cast<LPDIRECT3DDEVICE9*>(0x50DADDC);
+		auto directXVTable = *((uint32_t**)device);
+
+		//Hook D3D9EndScene
+		if (MH_CreateHook(reinterpret_cast<LPVOID>(directXVTable[42]), &DirectXEndSceneHook, reinterpret_cast<LPVOID*>(&endScenePtr)) != MH_OK
+			&& MH_EnableHook(reinterpret_cast<LPVOID>(directXVTable[42])) != MH_OK)
+		{
+			WriteLog("ERROR: Failed to hook D3D9EndScene!");
+			return false;
+		}
+		//Hook D3D9Reset
+		if (MH_CreateHook(reinterpret_cast<LPVOID>(directXVTable[16]), &DirectXResetHook, reinterpret_cast<LPVOID*>(&resetPtr)) != MH_OK
+			&& MH_EnableHook(reinterpret_cast<LPVOID>(directXVTable[16])) != MH_OK)
+		{
+			WriteLog("ERROR: Failed to hook D3D9Reset!");
+			return false;
+		}
+
+		return true;
+	}
+
 	bool UserInterface::Init()
 	{
 		using AnvilCommon::Utils::HookFlags;
@@ -194,7 +241,9 @@ namespace AnvilEldorado
 			// Hook UI vftable's forge menu button handler, so arrow keys can act as bumpers
 			// added side effect: analog stick left/right can also navigate through menus
 			// TODO: Move to input class?
-			&& Hook(0x129EFD8, UI_Forge_ButtonPressHandler_Hook, HookFlags::IsVirtual).Apply();
+			&& Hook(0x129EFD8, UI_Forge_ButtonPressHandler_Hook, HookFlags::IsVirtual).Apply()
+			// Hook DirectX
+			&& Hook(0x620386, DirectXCreateDeviceHook, HookFlags::IsCall).Apply();
 	}
 
 	const auto UI_CreateGameWindow = reinterpret_cast<HWND(*)()>(0xA223F0);
