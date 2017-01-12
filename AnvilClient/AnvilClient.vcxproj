@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winmm.lib;ws2_32.lib;AnvilCommon.lib;libMinHook.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;ws2_32.lib;AnvilCommon.lib;libMinHook.lib;CEGUIBase-0_Static_d.lib;CEGUICommonDialogs-0_Static_d.lib;CEGUICoreWindowRendererSet_Static_d.lib;CEGUIDirect3D9Renderer-0_Static_d.lib;CEGUIExpatParser_Static_d.lib;CEGUISILLYImageCodec_Static_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Debug;$(SolutionDir)AnvilCommon\Depends\Library\x86\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
@@ -108,6 +108,7 @@
     <PreBuildEvent>
       <Message>Incrementing Build Number</Message>
     </PreBuildEvent>
+    <ProjectReference />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -157,7 +158,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winmm.lib;ws2_32.lib;AnvilCommon.lib;libMinHook.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;ws2_32.lib;AnvilCommon.lib;libMinHook.lib;CEGUIBase-0_Static.lib;CEGUICommonDialogs-0_Static.lib;CEGUICoreWindowRendererSet_Static.lib;CEGUIDirect3D9Renderer-0_Static.lib;CEGUIExpatParser_Static.lib;CEGUISILLYImageCodec_Static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Release;$(SolutionDir)AnvilCommon\Depends\Library\x86\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>

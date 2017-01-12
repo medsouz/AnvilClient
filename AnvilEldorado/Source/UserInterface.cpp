@@ -12,6 +12,9 @@
 #include "Blam\Tags\UserInterface\ChudDefinition.hpp"
 #include "Blam\Tags\UserInterface\ChudGlobalsDefinition.hpp"
 
+#include <CEGUI\CEGUI.h>
+#include <CEGUI\RendererModules\Direct3D9\Renderer.h>
+
 #include "BuildInfo.hpp"
 #include "Globals.hpp"
 #include "Game.hpp"
@@ -149,20 +152,19 @@ namespace AnvilEldorado
 	}
 
 	typedef HRESULT(WINAPI *D3D9ENDSCENE)(LPDIRECT3DDEVICE9);
-	D3D9ENDSCENE endScenePtr = NULL;
-
 	typedef HRESULT(WINAPI *D3D9RESET)(LPDIRECT3DDEVICE9, D3DPRESENT_PARAMETERS*);
+	D3D9ENDSCENE endScenePtr = NULL;
 	D3D9RESET resetPtr = NULL;
 
 	HRESULT __stdcall DirectXEndSceneHook(LPDIRECT3DDEVICE9 device)
 	{
-		return (*endScenePtr)(device);
+		CEGUI::System::getSingleton().renderAllGUIContexts();
+		return endScenePtr(device);
 	}
 
 	HRESULT __stdcall DirectXResetHook(LPDIRECT3DDEVICE9 device, D3DPRESENT_PARAMETERS *params)
 	{
-		auto result = resetPtr(device, params);
-		return result;
+		return resetPtr(device, params);
 	}
 
 	bool DirectXCreateDeviceHook(bool windowless, bool nullRefDevice)
@@ -189,6 +191,8 @@ namespace AnvilEldorado
 			WriteLog("ERROR: Failed to hook D3D9Reset!");
 			return false;
 		}
+
+		CEGUI::Direct3D9Renderer::bootstrapSystem(device);
 
 		return true;
 	}
