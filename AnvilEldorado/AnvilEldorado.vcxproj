@@ -122,6 +122,14 @@
     <ClInclude Include="Source\Game\Players\PlayerPropertiesExtensionBase.hpp" />
     <ClInclude Include="Source\Game\UI\Hooks.hpp" />
     <ClInclude Include="Source\Game\UI\UIImpl.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\Bridge\Client\ClientFunctions.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\Bridge\WebRendererQuery.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\Bridge\WebRendererQueryHandler.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRenderer.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererApp.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererHandler.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererSchemeHandler.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererSchemeHandlerFactory.hpp" />
     <ClInclude Include="Source\Graphics.hpp" />
     <ClInclude Include="Source\Camera.hpp" />
     <ClInclude Include="Source\Hooking\Hooking.hpp" />
@@ -179,6 +187,13 @@
     <ClCompile Include="Source\Game\Players\PlayerPropertiesExtender.cpp" />
     <ClCompile Include="Source\Game\UI\Hooks.cpp" />
     <ClCompile Include="Source\Game\UI\UIImpl.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\Bridge\Client\ClientFunctions.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\Bridge\WebRendererQueryHandler.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRenderer.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererApp.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererHandler.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererSchemeHandler.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererSchemeHandlerFactory.cpp" />
     <ClCompile Include="Source\Globals.cpp" />
     <ClCompile Include="Source\Graphics.cpp" />
     <ClCompile Include="Source\Input.cpp" />
@@ -257,7 +272,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source;$(ProjectDir)Depends\Include;$(SolutionDir)AnvilCommon\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;$(ProjectDir)Source;$(ProjectDir)Depends\Include;$(SolutionDir)AnvilCommon\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StringPooling>true</StringPooling>
@@ -269,10 +284,10 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;libcef.lib;libcef_dll_wrapperd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)Depends\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;$(ProjectDir)Depends\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -307,7 +322,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source;$(ProjectDir)Depends\Include;$(SolutionDir)AnvilCommon\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;$(ProjectDir)Source;$(ProjectDir)Depends\Include;$(SolutionDir)AnvilCommon\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StringPooling>true</StringPooling>
@@ -320,10 +335,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;libcef.lib;libcef_dll_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)Depends\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;$(ProjectDir)Depends\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -56,6 +56,13 @@
     <ClCompile Include="Source\Game\Audio\Hooks.cpp" />
     <ClCompile Include="Source\Game\Players\PlayerArmorExtension.cpp" />
     <ClCompile Include="Source\Game\Players\Hooks.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRenderer.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererApp.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererHandler.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererSchemeHandler.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\WebRendererSchemeHandlerFactory.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\Bridge\WebRendererQueryHandler.cpp" />
+    <ClCompile Include="Source\Game\UI\Web\Bridge\Client\ClientFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Engine.hpp" />
@@ -169,5 +176,13 @@
     <ClInclude Include="Source\Game\Audio\Hooks.hpp" />
     <ClInclude Include="Source\Game\Players\Hooks.hpp" />
     <ClInclude Include="Source\Game\Players\PlayerArmorExtension.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRenderer.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererApp.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererHandler.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererSchemeHandler.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\WebRendererSchemeHandlerFactory.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\Bridge\WebRendererQuery.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\Bridge\WebRendererQueryHandler.hpp" />
+    <ClInclude Include="Source\Game\UI\Web\Bridge\Client\ClientFunctions.hpp" />
   </ItemGroup>
 </Project>

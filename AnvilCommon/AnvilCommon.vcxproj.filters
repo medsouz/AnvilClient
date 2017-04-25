@@ -11,11 +11,13 @@
     <ClInclude Include="Source\Interfaces\Initializable.hpp" />
     <ClInclude Include="Source\Interfaces\Client.hpp" />
     <ClInclude Include="Source\Interfaces\Engine.hpp" />
+    <ClInclude Include="Source\Utils\Rectangle.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Utils\Util.cpp" />
     <ClCompile Include="Source\Utils\Logger.cpp" />
     <ClCompile Include="Source\Utils\Hook.cpp" />
     <ClCompile Include="Source\Utils\Patch.cpp" />
+    <ClCompile Include="Source\Utils\Rectangle.cpp" />
   </ItemGroup>
 </Project>
