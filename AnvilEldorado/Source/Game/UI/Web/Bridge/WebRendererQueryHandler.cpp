@@ -4,7 +4,7 @@ using Anvil::Client::Rendering::Bridge::WebRendererQuery;
 using Anvil::Client::Rendering::Bridge::WebRendererQueryHandler;
 
 WebRendererQueryHandler::WebRendererQueryHandler() :
-	m_Queries()
+	m_Queries(1024)
 {
 }
 
@@ -83,8 +83,8 @@ void WebRendererQueryHandler::AddMethod(const std::string &p_Name, const WebRend
 void WebRendererQueryHandler::Update()
 {
 	// Process each pending query
-	PendingQuery *s_PendingQuery = m_Queries.front();
-	while (s_PendingQuery != nullptr)
+	PendingQuery *s_PendingQuery;
+	while (m_Queries.pop(s_PendingQuery))
 	{
 		std::unique_ptr<PendingQuery> s_Query(s_PendingQuery); // For safety
 
@@ -94,8 +94,5 @@ void WebRendererQueryHandler::Update()
 			s_Query->m_Callback->Success(s_Result);
 		else
 			s_Query->m_Callback->Failure(s_ErrorCode, s_Result);
-
-		m_Queries.pop();
-		s_PendingQuery = m_Queries.front();
 	}
 }

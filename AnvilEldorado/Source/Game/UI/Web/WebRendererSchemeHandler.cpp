@@ -5,6 +5,16 @@ Code was used from NoFaTe (http://nofate.me)
 #include "WebRendererSchemeHandler.hpp"
 #include <Utils\Logger.hpp>
 
+#include <boost/network/uri.hpp>
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/algorithm/string.hpp>
+
+#include <boost/thread.hpp>
+
+#include <boost/interprocess/file_mapping.hpp>
+#include <boost/interprocess/mapped_region.hpp>
+
 #include <filesystem>
 
 #include "WebRenderer.hpp"

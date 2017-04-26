@@ -6,6 +6,7 @@ Code was used from NoFaTe (http://nofate.me)
 #include <Utils\Rectangle.hpp>
 #include "Bridge/WebRendererQueryHandler.hpp"
 #include "Bridge/Client/ClientFunctions.hpp"
+#include <boost/algorithm/string/predicate.hpp>
 
 using namespace Anvil::Client::Rendering;
 

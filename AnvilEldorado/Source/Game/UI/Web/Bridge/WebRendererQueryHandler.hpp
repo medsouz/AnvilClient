@@ -1,8 +1,8 @@
 #pragma once
 
 #include <include/wrapper/cef_message_router.h>
+#include <boost/lockfree/queue.hpp>
 #include <unordered_map>
-#include <queue>
 #include <rapidjson/document.h>
 #include "WebRendererQuery.hpp"
 
@@ -25,7 +25,7 @@ namespace Anvil
 					};
 
 					// Can't use shared_ptr here because lockfree queue entries must be trivially assignable
-					std::queue<PendingQuery*> m_Queries;
+					boost::lockfree::queue<PendingQuery*> m_Queries;
 
 					std::unordered_map<std::string, WebRendererQuery> m_Methods;
 
